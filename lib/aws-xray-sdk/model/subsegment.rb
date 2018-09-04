@@ -17,11 +17,11 @@ module XRay
     #   may not be its direct parent.
     # @param [String] namespace Currently supported namespaces are
     #   'remote', 'aws', 'local'.
-    def initialize(name:, segment:, namespace: 'local')
+    def initialize(name:, segment:, namespace: 'local', start_time: Time.now.to_f)
       @name = name
       @segment = segment
       @namespace = namespace
-      @start_time = Time.now.to_f
+      @start_time = start_time
       @sampled = true
     end
 

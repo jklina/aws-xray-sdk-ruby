@@ -60,11 +60,11 @@ module XRay
     # Its sampling decision will follow its parent.
     # @return [Subsegment] the newly created subsegment. It could be `nil` if no active entity
     #   can be found and `context_missing` is set to `LOG_ERROR`.
-    def begin_subsegment(name, namespace: nil, segment: nil)
+    def begin_subsegment(name, namespace: nil, segment: nil, start_time: Time.now.to_f)
       entity = segment || current_entity
       return unless entity
       if entity.sampled
-        subsegment = Subsegment.new name: name, segment: entity.segment, namespace: namespace
+        subsegment = Subsegment.new name: name, segment: entity.segment, namespace: namespace, start_time: start_time
       else
         subsegment = DummySubsegment.new name: name, segment: entity.segment
       end
